@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.0 -->
+<interface>
+  <!-- interface-name window.ui -->
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.7"/>
+  <template class="ConfyWindow" parent="AdwApplicationWindow">
+    <child>
+      <object class="AdwNavigationSplitView" id="split-view">
+        <property name="content">
+          <object class="AdwNavigationPage" id="content">
+            <property name="child">
+              <object class="AdwToolbarView" id="content-toolbar">
+                <property name="content">
+                  <object class="AdwViewStack" id="content-stack">
+                    <child>
+                      <object class="AdwViewStackPage" id="settings-page">
+                        <property name="child">
+                          <object class="GtkLabel">
+                            <property name="label">Empty Page</property>
+                          </object>
+                        </property>
+                        <property name="icon-name">sliders-horizontal-symbolic</property>
+                        <property name="name">settings</property>
+                        <property name="title">Settings</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage" id="file-editor-page">
+                        <property name="child">
+                          <object class="GtkLabel">
+                            <property name="label">Empty Page</property>
+                          </object>
+                        </property>
+                        <property name="icon-name">org.gnome.TextEditor-symbolic</property>
+                        <property name="name">file-editor</property>
+                        <property name="title">File Editor</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+                <child type="top">
+                  <object class="AdwHeaderBar" id="content-headerbar">
+                    <property name="title-widget">
+                      <object class="AdwViewSwitcher" id="content-switcher">
+                        <property name="policy">wide</property>
+                        <property name="stack">content-stack</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="title">Confy</property>
+          </object>
+        </property>
+        <property name="sidebar">
+          <object class="AdwNavigationPage" id="sidebar">
+            <property name="child">
+              <object class="AdwToolbarView" id="sidebar-toolbar">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+              </object>
+            </property>
+            <property name="title">Collections</property>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+</interface>
