@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=confy
+Exec=confy
+Icon=win.ohmyiris.Confy
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

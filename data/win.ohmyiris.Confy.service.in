@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=win.ohmyiris.Confy
+Exec=@bindir@/confy --gapplication-service

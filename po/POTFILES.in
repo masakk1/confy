@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/win.ohmyiris.Confy.desktop.in
+data/win.ohmyiris.Confy.metainfo.xml.in
+data/win.ohmyiris.Confy.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
