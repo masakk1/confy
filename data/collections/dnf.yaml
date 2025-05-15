@@ -1,0 +1,30 @@
+---
+- name: dnf
+  title: DNF
+  description: Package Manager for RHEL, Fedora, and derivatives...
+  locations:
+    - name: "Default Path"
+      path: "/etc/dnf/dnf.conf"
+  setting_groups:
+    - name: Proxy
+      actions:
+          - name: "Proxy URL"
+            input:
+              module: confy.widgets.adw.entryrow
+            output:
+              module: confy.actions.conf.variable
+              name: proxy
+
+          - name: "Proxy User Username"
+            input:
+              module: confy.widgets.adw.entryrow
+            output:
+              module: confy.actions.conf.variable
+              name: proxy_username
+
+          - name: "Proxy User Password"
+            input:
+              module: confy.widgets.adw.passwordentryrow
+            output:
+              module: confy.actions.conf.variable
+              name: proxy_password

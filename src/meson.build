@@ -30,6 +30,7 @@ confy_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'widget_factory.py'
 ]
 
 install_data(confy_sources, install_dir: moduledir)

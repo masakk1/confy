@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import sys
 import gi
 
@@ -26,9 +27,13 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw
 from .window import ConfyWindow
 
+import yaml
+
 
 class ConfyApplication(Adw.Application):
     """The main application singleton class."""
+
+    collections = []
 
     def __init__(self):
         super().__init__(application_id='win.ohmyiris.Confy',
@@ -37,6 +42,31 @@ class ConfyApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
+
+        self.search_collections()
+
+    def search_collections(self):
+        collections_folder = Gio.File.new_for_path("/app/share/collections")
+        cancellable = Gio.Cancellable()
+        collections_files = collections_folder.enumerate_children("standard::name,standard::content-type", Gio.FileQueryInfoFlags.NONE, cancellable)
+
+        file_info = collections_files.next_file()
+        while file_info:
+            content_type = file_info.get_content_type()
+            if content_type == "application/yaml" or content_type == ".yaml" or content_type == ".yml": # extensions are for windows
+                name = file_info.get_name()
+                file = collections_folder.get_child(name)
+                input_stream = file.read(cancellable)
+
+                bytes = input_stream.read_bytes(4096, cancellable)
+                yaml_data = bytes.get_data().decode()
+
+                data = yaml.safe_load(yaml_data)
+                self.collections.extend(data)
+
+            # Cycle to the next file
+            file_info = collections_files.next_file()
+
 
     def do_activate(self):
         """Called when the application is activated.
@@ -85,3 +115,4 @@ def main(version):
     """The application's entry point."""
     app = ConfyApplication()
     return app.run(sys.argv)
+

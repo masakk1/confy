@@ -20,11 +20,28 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 
+from confy.widget_factory import WidgetFactory
+
 @Gtk.Template(resource_path='/win/ohmyiris/Confy/window.ui')
 class ConfyWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'ConfyWindow'
 
-    label = Gtk.Template.Child()
+    collection_list = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.widget_factory = WidgetFactory()
+
+        self.build_collection_list()
+        self.collection_list.connect("row_activated", self.collection_activated)
+        self.collection_list.unselect_all()
+
+    def build_collection_list(self):
+        for collection in self.get_application().collections:
+            widget = self.widget_factory.create_collection_list_item(collection['name'])
+            self.collection_list.append(widget)
+
+    def collection_activated(self, lisbox, row):
+        item = row.get_child()
+        collection_id = item.collection_id

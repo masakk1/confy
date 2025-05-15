@@ -43,4 +43,7 @@ configure_file(
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )
 
+install_subdir('extensions', install_dir: get_option('datadir'))
+install_subdir('collections', install_dir: get_option('datadir'))
+
 subdir('icons')

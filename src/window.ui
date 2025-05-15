@@ -7,25 +7,36 @@
     <property name="default-width">800</property>
     <property name="default-height">600</property>
     <property name="content">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar">
-            <child type="end">
-              <object class="GtkMenuButton">
-                <property name="primary">True</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Main Menu</property>
-                <property name="menu-model">primary_menu</property>
+      <object class="AdwNavigationSplitView">
+        <property name="sidebar">
+          <object class="AdwNavigationPage">
+            <property name="title">Collections</property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="collection_list">
+                    <style>
+                      <class name="navigation-sidebar"></class>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
-        </child>
+        </property>
         <property name="content">
-          <object class="GtkLabel" id="label">
-            <property name="label" translatable="yes">Hello, World!</property>
-            <style>
-              <class name="title-1"/>
-            </style>
+          <object class="AdwNavigationPage">
+            <property name="title">Content</property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+              </object>
+            </child>
           </object>
         </property>
       </object>
